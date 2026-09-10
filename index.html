@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Un regalo para ti ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap');
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#fff;font-family:Montserrat,sans-serif;background:radial-gradient(circle at 50% 10%,#482342,#17101e 48%,#08070d);overflow-x:hidden}
+main{width:min(94%,760px);margin:auto;padding:35px 0 60px}.card{background:rgba(18,11,23,.82);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:34px 20px;text-align:center;box-shadow:0 20px 70px #0008;backdrop-filter:blur(12px)}
+h1,h2{font-family:"Cormorant Garamond",serif}h1{font-size:clamp(45px,11vw,72px);line-height:.9;margin:15px 0}h2{font-size:42px;margin:12px 0}.sub{color:#d8cbd8;line-height:1.8;max-width:580px;margin:0 auto 25px}.story{font-family:"Cormorant Garamond",serif;font-size:25px;line-height:1.45;color:#f9eff9}
+button{border:0;border-radius:999px;padding:15px 24px;margin:8px;background:#fff;color:#241321;font-weight:600;cursor:pointer;box-shadow:0 8px 28px #0005}.ghost{background:#ffffff12;color:#fff;border:1px solid #fff2}
+.hidden{display:none}.gift{font-size:88px;margin:20px;animation:float 2.5s ease-in-out infinite}
+.envelopes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:25px}.env{min-height:190px;padding:15px;border-radius:20px;background:#ffffff08;border:1px solid #fff1;display:flex;flex-direction:column;justify-content:center;align-items:center}.env .icon{font-size:62px}.env h3{font-family:"Cormorant Garamond";font-size:23px;margin:8px 0}.opened{opacity:.5}
+.modal{position:fixed;inset:0;background:#08050ccc;display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}.modalbox{width:min(600px,100%);background:#241426;border:1px solid #fff2;border-radius:28px;padding:30px;text-align:center;box-shadow:0 20px 80px #000}.modalbox p{font-family:"Cormorant Garamond";font-size:25px;line-height:1.45}
+.access{margin:25px auto 0;padding:22px;border-radius:22px;background:#ffffff08;border:1px solid #fff2;text-align:left;max-width:500px}.row{margin:12px 0}.label{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.65}.value{display:flex;gap:8px;align-items:center;margin-top:5px}.value code{flex:1;word-break:break-all;background:#0004;padding:10px;border-radius:10px}.copy{padding:10px 14px;margin:0;font-size:12px}
+#music{position:fixed;right:14px;bottom:14px;display:none;z-index:20;background:#211421;color:#fff;border:1px solid #fff2;padding:10px 14px;font-size:12px}
+@keyframes float{50%{transform:translateY(-9px)}}@keyframes pop{from{opacity:0;transform:scale(.94) translateY(15px)}to{opacity:1;transform:none}}
+.pop{animation:pop .7s ease both}
+@media(max-width:600px){.envelopes{grid-template-columns:1fr}.env{min-height:145px}.env .icon{font-size:54px}}
+</style>
+</head>
+<body>
+<main>
+<section class="card" id="intro">
+<div style="letter-spacing:3px;font-size:11px;opacity:.65;text-transform:uppercase">Para ti, con mucho cariño</div>
+<h1>Hay algo que quiero darte ♡</h1>
+<div class="story">
+<p>Me preguntaste si conocía a alguien que vendiera Disney+…</p>
+<p>Y pensé que podía buscarte una cuenta.</p>
+<p>Pero preferí hacer algo diferente.</p>
+</div>
+<div class="gift">🎁</div>
+<button id="open">Abrir mi regalo 🎁</button>
+</section>
+
+<section class="card hidden" id="surprise">
+<div class="pop">
+<div style="letter-spacing:3px;font-size:11px;opacity:.65">ANTES DE DARTE EL REGALO...</div>
+<h2>Hay 3 sobres para ti 💌</h2>
+<p class="sub">Abre los tres. Cada uno tiene algo que quería decirte.</p>
+<div class="envelopes">
+<div class="env" id="e1"><div class="icon">💌</div><h3>Para cuando quieras sonreír</h3><button onclick="openEnv(1)">Abrir</button></div>
+<div class="env" id="e2"><div class="icon">💌</div><h3>Para que sepas por qué lo hice</h3><button onclick="openEnv(2)">Abrir</button></div>
+<div class="env" id="e3"><div class="icon">💌</div><h3>El último... ❤️</h3><button onclick="openEnv(3)">Abrir</button></div>
+</div>
+<div id="progress" style="margin-top:20px;opacity:.65;font-size:12px">0 de 3 sobres abiertos</div>
+<div id="final" class="hidden pop">
+<h2>✨ Ahora sí...</h2>
+<p class="sub">Ya abriste los tres. Y ahora puedo darte lo que realmente quería regalarte.</p>
+<h2 style="font-size:48px">Tu propia cuenta de Disney+ 🍿</h2>
+<p class="sub">Porque cuando me preguntaste si conocía a alguien que vendiera una cuenta, pude simplemente buscar una... pero preferí darte una que fuera completamente tuya. ❤️</p>
+<div class="access">
+<div class="row"><div class="label">Correo</div><div class="value"><code id="email">Barreralobos35@gmail.com</code><button class="copy" onclick="copyText('email')">Copiar</button></div></div>
+<div class="row"><div class="label">Contraseña</div><div class="value"><code id="pass">Barrera6044</code><button class="copy" onclick="copyText('pass')">Copiar</button></div></div>
+</div>
+<p class="story" style="margin-top:25px">La suscripción es para que disfrutes todas esas películas y series que quieras... pero espero que muchas de ellas terminemos viéndolas juntos. ❤️🍿</p>
+</div>
+</div>
+</section>
+</main>
+<button id="music">♫ Música</button>
+<audio id="audio" preload="auto"><source src="cancion.mp3" type="audio/mpeg"></audio>
+
+<div class="modal hidden" id="modal"><div class="modalbox pop"><div style="font-size:54px">💌</div><p id="msg"></p><button onclick="closeModal()">Seguir ♡</button></div></div>
+
+<script>
+const audio=document.getElementById('audio'), music=document.getElementById('music');
+const opened=new Set();
+const messages={
+1:"Quería empezar diciéndote algo sencillo: me encanta poder hacerte sonreír. A veces no necesito una razón enorme para pensar en ti; cualquier cosita me recuerda a ti y me nace querer hacerte feliz. ❤️",
+2:"Cuando me preguntaste si conocía a alguien que vendiera Disney+, pensé que podía conseguirte una cuenta y ya. Pero mientras lo pensaba, preferí que fuera algo tuyo. No quería darte una cuenta prestada ni algo que simplemente encontrara por ahí. Quería darte un detalle que tuviera un poquito de mí. 🍿❤️",
+3:"Y si llegaste hasta este último sobre, ya entendiste la parte importante: no se trata solamente de una suscripción. Se trata de que cuando puedo hacer algo bonito por ti, me gusta hacerlo de una manera especial. Porque te quiero muchísimo. ❤️"
+};
+document.getElementById('open').onclick=async()=>{
+ try{await audio.play()}catch(e){}
+ document.getElementById('intro').classList.add('hidden');
+ document.getElementById('surprise').classList.remove('hidden');
+ music.style.display='block';
+ window.scrollTo(0,0);
+};
+function openEnv(n){
+ if(opened.has(n))return;
+ opened.add(n);document.getElementById('e'+n).classList.add('opened');
+ document.getElementById('msg').textContent=messages[n];
+ document.getElementById('modal').classList.remove('hidden');
+ document.getElementById('progress').textContent=opened.size+" de 3 sobres abiertos";
+}
+function closeModal(){
+ document.getElementById('modal').classList.add('hidden');
+ if(opened.size===3){document.getElementById('final').classList.remove('hidden');setTimeout(()=>document.getElementById('final').scrollIntoView({behavior:'smooth'}),250)}
+}
+music.onclick=()=>audio.paused?audio.play():audio.pause();
+async function copyText(id){try{await navigator.clipboard.writeText(document.getElementById(id).textContent);alert('Copiado ❤️')}catch(e){alert('No se pudo copiar automáticamente. Mantén presionado el texto para copiarlo.')}}
+</script>
+</body>
+</html>
